@@ -57,3 +57,67 @@ Returned when one or more request fields fail validation.
 **Status:** `500 Internal Server Error`
 
 Returned when user creation or token generation fails on the server.
+
+## Login User
+
+### Endpoint
+
+`POST /users/login`
+
+Authenticates an existing user and returns an authentication token.
+
+### Request Body
+
+Send the data as JSON:
+
+```json
+{
+	"email": "jane@example.com",
+	"password": "secret123"
+}
+```
+
+### Required Data
+
+| Field | Type | Required | Requirements |
+| --- | --- | --- | --- |
+| `email` | string | Yes | Must be a valid email address |
+| `password` | string | Yes | At least 6 characters |
+
+### Success Response
+
+**Status:** `200 OK`
+
+```json
+{
+	"token": "your-auth-token",
+	"user": {
+		"_id": "user-id",
+		"fullname": {
+			"firstname": "Jane",
+			"lastname": "Doe"
+		},
+		"email": "jane@example.com"
+	}
+}
+```
+
+### Error Responses
+
+#### Validation Error
+
+**Status:** `400 Bad Request`
+
+Returned when the email or password fails validation.
+
+#### Invalid Credentials
+
+**Status:** `401 Unauthorized`
+
+```json
+{
+	"message": "Invalid email or password"
+}
+```
+
+Returned when the email address is not registered or the password is incorrect.
