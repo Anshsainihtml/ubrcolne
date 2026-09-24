@@ -72,7 +72,7 @@ captainSchema.methods.generateAuthToken = function () {
     return token;
 }
 
-captainSchema.methods.coparePassword = async function (password) {
+captainSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
