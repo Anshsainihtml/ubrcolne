@@ -70,7 +70,7 @@ export const getCaptainProfile = async (req, res, next) => {
 }
 
 export const logoutCaptain = async (req, res, next) => {
-    const token = req.cookies.token || req.headers.authorizatoin?.split(' ')[ 1 ];
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[ 1 ];
 
     await blacklistTokenModel.create({ token });
 
